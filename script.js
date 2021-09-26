@@ -79,28 +79,24 @@ function flipCards() {
 
     if (isRoundWinner(playerCard,computerCard)) {
         text.innerText = 'Win'
-        playerDeck.push(playerCard)
-        playerDeck.push(computerCard)
         playerPoints += 1
 
 
     } else if (isRoundWinner(computerCard,playerCard)) {
         text.innerText = 'Lose'
-        computerDeck.push(playerCard)
-        computerDeck.push(computerCard)
         computerPoints += 1
 
     } else {
         text.innerText = 'Draw'
-        playerDeck.push(playerCard)
-        computerDeck.push(computerCard)
     }
 
-    if (isGameOver(playerDeck)){
+    if (isGameOver(playerDeck) && computerPoints>playerPoints){
         text.innerText = 'You Lose!!!'
+        alert('YOU LOSE')
         stop = true
     } else if(isGameOver(computerDeck)) {
         text.innerText = 'You Win!!!'
+        alert('YOU WIN')
         stop = true
     }
 }
