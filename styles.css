@@ -77,6 +77,15 @@ body {
   user-select: none;
 }
 
+.image {
+  margin-top: 2rem;
+  position: relative;
+  transform: translateX(40%);
+  align-items: center;
+  justify-content: center;
+  user-select: none;
+}
+
 .card.red {
   color: red;
 }
