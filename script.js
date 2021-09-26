@@ -24,20 +24,27 @@ const computerPointsElement = document.querySelector('.computer-points')
 const playerPointsElement = document.querySelector('.player-points')
 const text = document.querySelector('.text')
 
-let playerDeck, computerDeck, inRound, stop, computerPoints,playerPoints
+let playerDeck, computerDeck, inRound, stop, computerPoints,playerPoints, alertIndicate
 
 document.addEventListener('click', () => {
-    if(stop){
+    if(stop && alertIndicate){
         startGame()
         return
     }
 
     if(inRound){
         cleanBeforeRound()
-    } else {
+    }  else if (stop === false)  {
         flipCards()
+    } else if (stop && alertIndicate === false){
+        alertResult()
+        alertIndicate = true
+        console.log(alertIndicate)
     }
 })
+
+
+
 
 startGame()
 function startGame() {
@@ -52,6 +59,7 @@ function startGame() {
 
     inRound = false
     stop = false
+    alertIndicate = false
 
     cleanBeforeRound()
 
@@ -74,6 +82,8 @@ function flipCards() {
 
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
+ 
+    
 
     updateDeckPointCount()
 
@@ -92,14 +102,20 @@ function flipCards() {
 
     if (isGameOver(playerDeck) && computerPoints>playerPoints){
         text.innerText = 'You Lose!!!'
-        alert('YOU LOSE')
         stop = true
-    } else if(isGameOver(computerDeck)) {
+
+    } else if (isGameOver(computerDeck) && computerPoints<playerPoints) {
         text.innerText = 'You Win!!!'
-        alert('YOU WIN')
         stop = true
+
     }
+
+
 }
+
+
+
+
 
 function updateDeckPointCount(){
     computerDeckElement.innerText = computerDeck.numberOfCards
@@ -116,3 +132,13 @@ function isRoundWinner(cardOne, cardTwo) {
 function isGameOver(deck) {
     return deck.numberOfCards === 0
 }
+
+
+function alertResult(){        
+    if(stop === true && computerPoints>playerPoints){
+    alert(`You Lose!!! Click to play again`)
+    alertIndicate = true
+}else{
+    alert(`You Win!!! Click to play again`)
+    alertIndicate = true
+}}
