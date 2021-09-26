@@ -13,6 +13,7 @@ body {
   cursor: pointer;
   justify-content: center;
   padding-top: 1rem;
+  user-select: none;
 }
 
 .header {
