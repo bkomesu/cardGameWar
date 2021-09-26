@@ -20,11 +20,11 @@ const computerCardSlot = document.querySelector(".computer-card-slot")
 const playerCardSlot = document.querySelector(".player-card-slot")
 const computerDeckElement = document.querySelector(".computer-deck")
 const playerDeckElement = document.querySelector(".player-deck")
-const computerPoints = document.querySelector('.computer-points')
-const playerPoints = document.querySelector('.player-points')
+const computerPointsElement = document.querySelector('.computer-points')
+const playerPointsElement = document.querySelector('.player-points')
 const text = document.querySelector('.text')
 
-let playerDeck, computerDeck, inRound, stop
+let playerDeck, computerDeck, inRound, stop, computerPoints,playerPoints
 
 document.addEventListener('click', () => {
     if(stop){
@@ -47,6 +47,9 @@ function startGame() {
     const deckMidpoint = Math.ceil(deck.numberOfCards / 2)
     playerDeck = new Deck(deck.cards.slice(0,deckMidpoint))
     computerDeck = new Deck(deck.cards.slice(deckMidpoint, deck.numberOfCards))
+    computerPoints = 0
+    playerPoints = 0
+
     inRound = false
     stop = false
 
@@ -60,7 +63,7 @@ function cleanBeforeRound(){
     playerCardSlot.innerHTML = ''
     text.innerText = ''
 
-    updateDeckCount()
+    updateDeckPointCount()
 }
 
 function flipCards() {
@@ -72,17 +75,21 @@ function flipCards() {
     playerCardSlot.appendChild(playerCard.getHTML())
     computerCardSlot.appendChild(computerCard.getHTML())
 
-    updateDeckCount()
+    updateDeckPointCount()
 
     if (isRoundWinner(playerCard,computerCard)) {
         text.innerText = 'Win'
         playerDeck.push(playerCard)
         playerDeck.push(computerCard)
+        playerPoints += 1
+
 
     } else if (isRoundWinner(computerCard,playerCard)) {
         text.innerText = 'Lose'
         computerDeck.push(playerCard)
         computerDeck.push(computerCard)
+        computerPoints += 1
+
     } else {
         text.innerText = 'Draw'
         playerDeck.push(playerCard)
@@ -98,14 +105,17 @@ function flipCards() {
     }
 }
 
-function updateDeckCount(){
+function updateDeckPointCount(){
     computerDeckElement.innerText = computerDeck.numberOfCards
     playerDeckElement.innerText = playerDeck.numberOfCards
+    computerPointsElement.innerText = computerPoints
+    playerPointsElement.innerText = playerPoints
 }
 
 function isRoundWinner(cardOne, cardTwo) {
         return CARD_VALUE_MAP[cardOne.value] > CARD_VALUE_MAP[cardTwo.value]
 }
+
 
 function isGameOver(deck) {
     return deck.numberOfCards === 0
