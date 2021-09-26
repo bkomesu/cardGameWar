@@ -20,6 +20,8 @@ const computerCardSlot = document.querySelector(".computer-card-slot")
 const playerCardSlot = document.querySelector(".player-card-slot")
 const computerDeckElement = document.querySelector(".computer-deck")
 const playerDeckElement = document.querySelector(".player-deck")
+const computerPoints = document.querySelector('.computer-points')
+const playerPoints = document.querySelector('.player-points')
 const text = document.querySelector('.text')
 
 let playerDeck, computerDeck, inRound, stop
