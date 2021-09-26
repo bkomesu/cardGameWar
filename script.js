@@ -91,7 +91,6 @@ function flipCards() {
         text.innerText = 'Win'
         playerPoints += 1
 
-
     } else if (isRoundWinner(computerCard,playerCard)) {
         text.innerText = 'Lose'
         computerPoints += 1
@@ -109,13 +108,7 @@ function flipCards() {
         stop = true
 
     }
-
-
 }
-
-
-
-
 
 function updateDeckPointCount(){
     computerDeckElement.innerText = computerDeck.numberOfCards
