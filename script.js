@@ -103,7 +103,7 @@ function flipCards() {
         text.innerText = 'You Lose!!!'
         stop = true
 
-    } else if (isGameOver(computerDeck) && computerPoints<playerPoints) {
+    } else if (isGameOver(computerDeck) && computerPoints<=playerPoints) {
         text.innerText = 'You Win!!!'
         stop = true
 
